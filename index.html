@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffecd2);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+        }
+        .title-container {
+            perspective: 1000px;
+            cursor: pointer;
+            width: 480px; /* Increased from 400px */
+            height: 120px; /* Increased from 100px */
+        }
+        .flipper {
+            transition: 0.6s;
+            transform-style: preserve-3d;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .title-container:hover .flipper {
+            transform: rotateY(180deg);
+        }
+        .front, .back {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .front {
+            z-index: 2;
+            transform: rotateY(0deg);
+        }
+        .back {
+            transform: rotateY(180deg);
+        }
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.6em; /* Increased from 3em */
+            margin: 0;
+            opacity: 0;
+            animation: flipIn 1.5s ease-out forwards;
+        }
+        .arrow {
+            font-size: 3.6em; /* Increased from 3em */
+            transform: rotate(90deg);
+        }
+        @keyframes flipIn {
+            0% {
+                opacity: 0;
+                transform: rotateX(-90deg);
+            }
+            100% {
+                opacity: 1;
+                transform: rotateX(0deg);
+            }
+        }
+        .content-wrapper {
+            display: none;
+            justify-content: center;
+            align-items: stretch;
+            width: 90%;
+            max-width: 1200px; /* Increased from 1000px */
+            margin-top: 24px; /* Increased from 20px */
+        }
+        .image-container {
+            width: 300px; /* Increased from 250px */
+            height: 480px; /* Increased from 400px */
+            border-radius: 24px; /* Increased from 20px */
+            overflow: hidden;
+            box-shadow: 0 0 24px rgba(0,0,0,0.3); /* Increased from 20px */
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+        .image-container:hover {
+            transform: scale(1.1);
+            z-index: 2;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .wishes {
+            flex-grow: 1;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 24px; /* Increased from 20px */
+            border-radius: 24px; /* Increased from 20px */
+            backdrop-filter: blur(6px); /* Increased from 5px */
+            margin-left: 24px; /* Increased from 20px */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.3s ease, z-index 0.3s ease;
+        }
+        .wishes:hover {
+            transform: scale(1.1);
+            z-index: 2;
+        }
+        p {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.64em; /* Increased from 2.2em */
+            margin: 18px 0; /* Increased from 15px */
+            text-align: center;
+            line-height: 1.4;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+            .wishes {
+                margin-left: 0;
+                margin-top: 24px; /* Increased from 20px */
+                width: 100%;
+            }
+            p {
+                font-size: 2.16em; /* Increased from 1.8em */
+            }
+            .title-container {
+                width: 360px; /* Increased from 300px */
+            }
+            h1, .arrow {
+                font-size: 3em; /* Increased from 2.5em */
+            }
+        }
+        .firework {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0.6vmin; /* Increased from 0.5vmin */
+            aspect-ratio: 1;
+            background: radial-gradient(circle, #ff0 0.24vmin, #0000 0) 50% 00%,
+                        radial-gradient(circle, #ff0 0.36vmin, #0000 0) 00% 50%,
+                        radial-gradient(circle, #ff0 0.6vmin, #0000 0) 50% 99%,
+                        radial-gradient(circle, #ff0 0.24vmin, #0000 0) 99% 50%,
+                        radial-gradient(circle, #ff0 0.36vmin, #0000 0) 80% 90%,
+                        radial-gradient(circle, #ff0 0.6vmin, #0000 0) 95% 90%,
+                        radial-gradient(circle, #ff0 0.6vmin, #0000 0) 10% 60%,
+                        radial-gradient(circle, #ff0 0.24vmin, #0000 0) 31% 80%,
+                        radial-gradient(circle, #ff0 0.36vmin, #0000 0) 80% 10%,
+                        radial-gradient(circle, #ff0 0.24vmin, #0000 0) 90% 23%,
+                        radial-gradient(circle, #ff0 0.36vmin, #0000 0) 45% 20%,
+                        radial-gradient(circle, #ff0 0.6vmin, #0000 0) 13% 24%;
+            background-size: 0.6vmin 0.6vmin; /* Increased from 0.5vmin */
+            background-repeat: no-repeat;
+            animation: firework 2s infinite;
+        }
+        @keyframes firework {
+            0% { transform: translate(-50%, -50%); width: 0.6vmin; opacity: 1; } /* Increased from 0.5vmin */
+            100% { width: 54vmin; opacity: 0; } /* Increased from 45vmin */
+        }
+        .confetti {
+            position: absolute;
+            width: 12px; /* Increased from 10px */
+            height: 24px; /* Increased from 20px */
+            background-color: #f2d74e;
+            opacity: 0;
+        }
+        @keyframes confettiFall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title-container" onclick="showContent()">
+            <div class="flipper">
+                <div class="front">
+                    <h1>Happy Birthday!</h1>
+                </div>
+                <div class="back">
+                    <h1 class="arrow">➤</h1>
+                </div>
+            </div>
+        </div>
+        <div class="content-wrapper">
+            <div class="image-container">
+                <img src="C:\Users\Holly\Desktop\1.jpg" alt="Birthday Photo">
+            </div>
+            <div class="wishes">
+                <p>祝你先于春天，跨过此间铮铮山峦</p>
+                <p>祝你踏浪而行，奔向无限光风霁月</p>
+                <p>永远阳光明媚，无事绊心弦</p>
+            </div>
+        </div>
+    </div>
+    <div class="firework"></div>
+    <div class="firework" style="left: 25%; animation-delay: 0.5s;"></div>
+    <div class="firework" style="left: 75%; animation-delay: 1s;"></div>
+    <script>
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.classList.add('firework');
+            firework.style.left = Math.random() * 100 + '%';
+            firework.style.top = Math.random() * 100 + '%';
+            firework.style.animationDuration = (Math.random() * 1 + 1) + 's';
+            document.body.appendChild(firework);
+            setTimeout(() => {
+                firework.remove();
+            }, 2000);
+        }
+
+        setInterval(createFirework, 300);
+
+        function createConfetti() {
+            const colors = ['#f2d74e', '#95c3de', '#ff9a9e', '#f8a5c2', '#b0f2b6'];
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                document.body.appendChild(confetti);
+
+                confetti.animate([
+                    { transform: 'translateY(-100vh) rotate(0deg)', opacity: 1 },
+                    { transform: 'translateY(100vh) rotate(720deg)', opacity: 0 }
+                ], {
+                    duration: Math.random() * 2000 + 3000,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    fill: 'forwards'
+                });
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+
+        window.addEventListener('load', createConfetti);
+
+        function showContent() {
+            document.querySelector('.title-container').style.display = 'none';
+            document.querySelector('.content-wrapper').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
